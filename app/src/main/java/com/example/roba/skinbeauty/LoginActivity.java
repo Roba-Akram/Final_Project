@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 Log.d(TAG, "onErrorResponse: " + error.toString());
                                 progressDialog.dismiss();
-                                Toast.makeText(LoginActivity.this, R.string.connection_failed, Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "connection_failed", Toast.LENGTH_LONG).show();
                             }
                         }) {
                     @Override
