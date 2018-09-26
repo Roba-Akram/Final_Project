@@ -69,91 +69,6 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
 
-            layoutUsername.setError(null);
-            layoutPassword.setError(null);
-
-            if (Utility.isOnline(this)) {
-
-
-                JSONObject jsonObject = new JSONObject();
-
-                try {
-
-                    jsonObject.put("client_secret", "HnHO5kq6qv39uDnA6FOO5MwNLqkPzzymh78OS06q");
-                    jsonObject.put("client_id", 2);
-                    jsonObject.put("grant_type", "password");
-                    jsonObject.put("username", username);
-                    jsonObject.put("password", password);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setMessage("Please wait...");
-                progressDialog.show();
-
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
-                        Api.LOGIN_URL,
-                        jsonObject,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d(TAG, "onResponse: " + response.toString());
-                                progressDialog.dismiss();
-
-                                try {
-
-                                    String tokenType = response.getString("token_type");
-                                    String accessToken = response.getString("access_token");
-
-                                    Log.d(TAG, "onResponse: " + accessToken);
-
-                                    // Store in shared preferences
-                                    SharedPreferences preferences = getSharedPreferences("myprefs", MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = preferences.edit();
-                                    editor.putBoolean("logged_in", true);
-                                    editor.putString("token_type", tokenType);
-                                    editor.putString("access_token", accessToken);
-                                    editor.apply();
-
-                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.d(TAG, "onErrorResponse: " + error.toString());
-                                progressDialog.dismiss();
-                                Toast.makeText(LoginActivity.this, "connection_failed", Toast.LENGTH_LONG).show();
-                            }
-                        }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String, String> headers = new HashMap<String, String>();
-                        headers.put("Content-Type", "application/json");
-                        return headers;
-                    }
-
-                };
-
-
-                AppController.getInstance(this).addToRequestQueue(request);
-
-            } else {
-                Toast.makeText(this, R.string.no_connection, Toast.LENGTH_LONG).show();
-            }
-
         }
 
     }
@@ -164,4 +79,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    public void loginByFacebook(View view) {
+    }
+
+    public void loginByGoogle(View view) {
+    }
 }

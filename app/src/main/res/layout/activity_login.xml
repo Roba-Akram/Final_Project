@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,13 +13,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        />
+    <include layout="@layout/toolbar"/>
 
 
     <ImageView
@@ -68,11 +67,54 @@
         android:text="Login"
         />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        >
+
+        <Button
+            android:id="@+id/login_by_facebook"
+            android:onClick="loginByFacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="facebook"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:id="@+id/login_by_google"
+            android:onClick="loginByGoogle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Google+"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"/>
+
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="register"
-        android:text="Not Registered ? Click here"
-        android:textSize="16sp" />
+        android:text="Don't Have An Account ?"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
+</ScrollView>
